@@ -5,6 +5,7 @@ import 'screens/home_screen.dart';
 import 'screens/savings_screen.dart';
 import 'screens/goals_screen.dart';
 import 'screens/fixed_costs_screen.dart';
+import 'screens/fixed_income_screen.dart';
 import 'screens/transactions_screen.dart';
 import 'screens/settings_screen.dart';
 import 'screens/sign_in_screen.dart';
@@ -54,7 +55,7 @@ class _BudgetierAppState extends State<BudgetierApp> {
 
 /// Shell widget that hosts a bottom navigation bar and displays the selected
 /// screen. This provides a simple way to switch between the core sections of
-/// the app (Home, Savings, Goals, Fixed Costs, Transactions, Settings).
+/// the app (Home, Savings, Goals, Fixed Costs, Income, Transactions, Settings).
 class _Shell extends StatefulWidget {
   const _Shell();
 
@@ -70,6 +71,7 @@ class _ShellState extends State<_Shell> {
     SavingsScreen(),
     GoalsScreen(),
     FixedCostsScreen(),
+    FixedIncomeScreen(),
     TransactionsScreen(),
     SettingsScreen(),
   ];
@@ -82,26 +84,29 @@ class _ShellState extends State<_Shell> {
 
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
-        body: SafeArea(child: _screens[_selectedIndex]),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.savings), label: 'Savings'),
-            BottomNavigationBarItem(icon: Icon(Icons.flag), label: 'Goals'),
-            BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet), label: 'Fixed'),
-            BottomNavigationBarItem(icon: Icon(Icons.receipt_long), label: 'Transactions'),
-            BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
-          ],
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-          // Highlight the selected item using the same light blue primary colour and
-          // dim unselected items. This ensures the navigation bar matches the
-          // overall light blue colour scheme.
-          selectedItemColor: Colors.lightBlue,
-          unselectedItemColor: Colors.grey,
-        ),
-      );
+    return Scaffold(
+      body: SafeArea(child: _screens[_selectedIndex]),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.savings), label: 'Savings'),
+          BottomNavigationBarItem(icon: Icon(Icons.flag), label: 'Goals'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_balance_wallet), label: 'Fixed'),
+          BottomNavigationBarItem(icon: Icon(Icons.attach_money), label: 'Income'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.receipt_long), label: 'Transactions'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        // Highlight the selected item using the same light blue primary colour and
+        // dim unselected items. This ensures the navigation bar matches the
+        // overall light blue colour scheme.
+        selectedItemColor: Colors.lightBlue,
+        unselectedItemColor: Colors.grey,
+      ),
+    );
   }
 }
