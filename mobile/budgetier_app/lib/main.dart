@@ -39,8 +39,11 @@ class _BudgetierAppState extends State<BudgetierApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Budgetier',
+      // Use a light blue colour palette throughout the application. The
+      // primarySwatch controls the default colours for app bars, buttons and
+      // other UI components. See https://api.flutter.dev/flutter/material/Colors-class.html
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.lightBlue,
       ),
       home: _isAuthenticated
           ? const _Shell()
@@ -79,21 +82,26 @@ class _ShellState extends State<_Shell> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(child: _screens[_selectedIndex]),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.savings), label: 'Savings'),
-          BottomNavigationBarItem(icon: Icon(Icons.flag), label: 'Goals'),
-          BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet), label: 'Fixed'),
-          BottomNavigationBarItem(icon: Icon(Icons.receipt_long), label: 'Transactions'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-      ),
-    );
+      return Scaffold(
+        body: SafeArea(child: _screens[_selectedIndex]),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.savings), label: 'Savings'),
+            BottomNavigationBarItem(icon: Icon(Icons.flag), label: 'Goals'),
+            BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet), label: 'Fixed'),
+            BottomNavigationBarItem(icon: Icon(Icons.receipt_long), label: 'Transactions'),
+            BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+          ],
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
+          // Highlight the selected item using the same light blue primary colour and
+          // dim unselected items. This ensures the navigation bar matches the
+          // overall light blue colour scheme.
+          selectedItemColor: Colors.lightBlue,
+          unselectedItemColor: Colors.grey,
+        ),
+      );
   }
 }
