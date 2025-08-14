@@ -53,10 +53,14 @@ class _TransactionTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isOutgoing = amount < 0;
+    // Use light blue for incoming transactions instead of green to align with
+    // the overall application colour scheme. Outgoing transactions remain
+    // highlighted in red to convey the negative context.
+    final Color indicatorColor = isOutgoing ? Colors.redAccent : Colors.lightBlue;
     return Card(
       child: ListTile(
         leading: CircleAvatar(
-          backgroundColor: isOutgoing ? Colors.redAccent : Colors.green,
+          backgroundColor: indicatorColor,
           child: Icon(isOutgoing ? Icons.arrow_upward : Icons.arrow_downward, color: Colors.white),
         ),
         title: Text(description),
@@ -64,7 +68,7 @@ class _TransactionTile extends StatelessWidget {
         trailing: Text(
           '${isOutgoing ? '-' : ''}€${amount.abs().toStringAsFixed(2)}',
           style: TextStyle(
-            color: isOutgoing ? Colors.redAccent : Colors.green,
+            color: indicatorColor,
             fontWeight: FontWeight.bold,
           ),
         ),
